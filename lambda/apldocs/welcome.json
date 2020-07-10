@@ -1,0 +1,235 @@
+{
+    "type": "APL",
+    "version": "1.1",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.1.0"
+        },
+        {
+            "name": "alexa-viewport-profiles",
+            "version": "1.1.0"
+        },
+        {
+            "name": "alexa-styles",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "Define dimensions for HorizontalListItem layout",
+            "dimensions": {
+                "touchWrapperWidth": "auto",
+                "touchWrapperHeight": "auto",
+                "containerWidth": "17vw",
+                "containerHeight": "30vh",
+                "imageWidth": "20vh",
+                "imageHeight": "20vh",
+                "imageBorderRadius": "2vh",
+                "itemBorderWidth": "3dp",
+                "textWidth": "17vw",
+                "textHeight": "8vh",
+                "textPaddingTop": "2vh",
+                "textFontSize": "2vw",
+                "textFontWeight": "100"
+            }
+        },
+        {
+            "description": "Override dimensions for HorizontalListItem layout on Small Round Hubs",
+            "when": "${@viewportProfile == @hubRoundSmall}",
+            "dimensions": {
+                "touchWrapperWidth": "55vw",
+                "touchWrapperHeight": "70vh",
+                "containerWidth": "60vw",
+                "containerHeight": "70vh",
+                "imageWidth": "55vw",
+                "imageHeight": "50vh",
+                "textWidth": "50vw",
+                "textHeight": "20vh",
+                "textPaddingTop": "3vh",
+                "textFontSize": "7vw"
+            }
+        },
+        {
+            "description": "Background Image for Launch Screen on Landscape Hubs",
+            "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge}",
+            "strings": {
+                "backgroundImg": "https://image.freepik.com/free-photo/chef-pours-cherry-tomatoes-bowl_79782-5.jpg?t=${Math.random() * Math.PI}"
+            }
+        },
+        {
+            "description": "Background Image for Launch Screen on XLarge Hubs (e.g TV)",
+            "when": "${@viewportProfile == @tvLandscapeXLarge}",
+            "strings": {
+                "backgroundImg": "https://image.freepik.com/free-photo/chef-pours-cherry-tomatoes-bowl_79782-5.jpg?t=${Math.random() * Math.PI}"
+            }
+        },
+        {
+            "description": "Skill Icon",
+            "strings": {
+                "skillIcon": "https://img.icons8.com/cute-clipart/128/000000/walter-white.png?t=${Math.random() * Math.PI}"
+            }
+        }
+    ],
+    "layouts": {
+        "HorizontalListItem": {
+            "description": "a touchable container with an image and a text - dimensions are adapted depending on Hub type",
+            "item": {
+                "when": "${data.id}",
+                "type": "TouchWrapper",
+                "id": "touch-${data.id}",
+                "width": "@touchWrapperWidth",
+                "height": "@touchWrapperHeight",
+                "item": {
+                    "type": "Container",
+                    "direction": "column",
+                    "width": "@containerWidth",
+                    "height": "@containerHeight",
+                    "alignItems": "center",
+                    "inheritParentState": true,
+                    "items": [
+                        {
+                            "type": "Frame",
+                            "width": "@imageWidth",
+                            "height": "@imageHeight",
+                            "borderRadius": "@imageBorderRadius",
+                            "style": "horizontalItemFrame",
+                            "inheritParentState": true,
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "source": "${data.image}",
+                                    "width": "${@imageWidth - (@itemBorderWidth * 2)}",
+                                    "height": "${@imageHeight - (@itemBorderWidth * 2)}",
+                                    "borderRadius": "@imageBorderRadius",
+                                    "scale": "best-fill",
+                                    "align": "center"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Text",
+                            "text": "${data.value}",
+                            "width": "@textWidth",
+                            "height": "@textHeight",
+                            "paddingTop": "@textPaddingTop",
+                            "fontSize": "@textFontSize",
+                            "fontWeight": "@textFontWeight",
+                            "color": "#4E7AB5",
+                            "textAlign": "center",
+                            "opacity": "${environment.aplVersion == '1.1' ? 0 : 1}",
+                            "onMount": [
+                                {
+                                    "type": "AnimateItem",
+                                    "duration": 2000,
+                                    "value": {
+                                        "property": "opacity",
+                                        "to": 1
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "onPress": [
+                    {
+                        "type": "AnimateItem",
+                        "easing": "ease-in-out",
+                        "duration": 1000,
+                        "repeatMode": "restart",
+                        "value": [
+                            {
+                                "property": "transform",
+                                "from": [
+                                    {
+                                        "translateX": 0
+                                    },
+                                    {
+                                        "scale": 1
+                                    }
+                                ],
+                                "to": [
+                                    {
+                                        "translateX": 0
+                                    },
+                                    {
+                                        "scale": 1.1
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "SendEvent",
+                        "arguments": [
+                            "TouchWelcomeScreen",
+                            "${data.id}",
+                            "${data.index}"
+                        ]
+                    }
+                ]
+            }
+        },
+        "MainScreen": {
+            "parameters": [
+                "background",
+                "headerIcon",
+                "headerIconRook",
+                "headerColor",
+                "options",
+                "backgroundColor"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "AlexaBackground",
+                            "backgroundImageSource": "@backgroundImg",
+                            "colorOverlay": true,
+                            "description": "Set background Image"
+                        },
+                        {
+                            "description": "Use Responsive Header accross all Hubs",
+                            "type": "AlexaHeader",
+                            "headerTitle": "${payload.sauceBossData.properties.headerTitle}",
+                            "headerAttributionImage": "@skillIcon"
+                        },
+                        {
+                            "type": "Container",
+                            "width": "100vw",
+                            "height": "50vh",
+                            "paddingTop": "20vh",
+                            "direction": "row",
+                            "data": [
+                                "${options[0]}",
+                                "${options[1]}",
+                                "${options[2]}",
+                                "${options[3]}",
+                                "${options[4]}",
+                                "${options[5]}"
+                            ],
+                            "items": [
+                                {
+                                    "type": "HorizontalListItem"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "item": [
+            {
+                "type": "MainScreen",
+                "options": "${payload.content.options}",
+                "title": "${payload.header.title}"
+            }
+        ]
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "header": {
+        "title":"Welcome to my custom skill"
+    },
+    "content": {
+        "backgroundImage": "https://image.freepik.com/free-photo/chef-pours-cherry-tomatoes-bowl_79782-5.jpg",
+        "backgroundcolor": "#FFFFFF",
+       "options": [
+            {
+                "value": "Option 1",
+                "image": "https://img.icons8.com/officel/480/000000/arryn-house.png",
+                "id": "OPT1",
+                "index": 0
+            },
+            {
+                "value": "Option 2",
+                "image": "https://img.icons8.com/officel/480/000000/baratheon-house.png",
+                "id": "OPT2",
+                "index": 1
+            },
+            {
+                "value": "Option 3",
+                "image": "https://img.icons8.com/officel/480/000000/greyjoy-house.png",
+                "id": "OPT3",
+                "index": 2
+            },
+            {
+                "value": "Option 4",
+                "image": "https://img.icons8.com/officel/480/000000/house-lannister.png",
+                "id": "OPT4",
+                "index": 3
+            },
+            {
+                "value": "Option 5",
+                "image": "https://img.icons8.com/officel/480/000000/house-stark.png",
+                "id": "OPT5",
+                "index": 4
+            },
+            {
+                "value": "Option 6",
+                "image": "https://img.icons8.com/officel/480/000000/targaryen-house.png",
+                "id": "OPT6",
+                "index": 5
+            }
+        ]
+    }
+}

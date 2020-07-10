@@ -1,0 +1,96 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "my custom skill",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "OptionIntent",
+          "slots": [
+            {
+              "name": "OptionSlot",
+              "type": "OptionsSlotType"
+            }
+          ],
+          "samples": [
+            "I wish {OptionSlot}",
+            "Show me {OptionSlot}",
+            "I would like {OptionSlot}",
+            "I want {OptionSlot}"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "OptionOnlyIntent",
+          "slots": [
+            {
+              "name": "OptionSlot",
+              "type": "OptionsSlotType"
+            }
+          ],
+          "samples": [
+            "{OptionSlot}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "id": "OPT6",
+              "name": {
+                "value": "option six"
+              }
+            },
+            {
+              "id": "OPT5",
+              "name": {
+                "value": "option five"
+              }
+            },
+            {
+              "id": "OPT4",
+              "name": {
+                "value": "option four"
+              }
+            },
+            {
+              "id": "OPT3",
+              "name": {
+                "value": "option three"
+              }
+            },
+            {
+              "id": "OPT2",
+              "name": {
+                "value": "option two"
+              }
+            },
+            {
+              "id": "OPT1",
+              "name": {
+                "value": "option one"
+              }
+            }
+          ],
+          "name": "OptionsSlotType"
+        }
+      ]
+    }
+  },
+  "version": "5"
+}

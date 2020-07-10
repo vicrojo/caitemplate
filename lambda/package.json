@@ -1,0 +1,17 @@
+{
+  "name": "caitemplate",
+  "version": "1.0.0",
+  "description": "A boilerplate for alexa skills development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "AWS CAI",
+  "license": "ISC",
+  "dependencies": {
+    "ask-sdk": "^2.7.0",
+    "i18next": "^19.1.0",
+    "i18next-sprintf-postprocessor": "^0.2.2",
+    "ask-sdk-s3-persistence-adapter": "^2.0.0"
+  }
+}

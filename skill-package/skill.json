@@ -5,10 +5,7 @@
         "en-US": {
           "summary": "Alexa Conversational AI template",
           "examplePhrases": ["open My Custom Skill", "launch My Custom Skill"],
-          "name": "Alexa Conversational AI template",
-          "description": "Alexa Conversational AI template",
-          "smallIconUri": "file://assets/images/en-US_smallIcon.png",
-          "largeIconUri": "file://assets/images/en-US_largeIcon.png"
+          "name": "Alexa Conversational AI template"
         }
       },
       "isAvailableWorldwide": true,
